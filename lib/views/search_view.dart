@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class SearchView extends StatelessWidget {
@@ -13,11 +15,14 @@ class SearchView extends StatelessWidget {
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Center(
           child: TextField(
-            decoration: InputDecoration(
+            onChanged: (data){
+              log(data);
+            },
+            decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
               hintText: 'Enter a city name',
               labelText: 'Search',
