@@ -1,6 +1,10 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/services/weather_service.dart';
+import 'package:weather_app/views/home_view.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -19,8 +23,11 @@ class SearchView extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Center(
           child: TextField(
-            onChanged: (data){
-              log(data);
+            onSubmitted: (value) async {
+              WeatherModel weatherModel = await WeatherService(Dio()).getCurrentWeather(cityName: value);
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return HomeView();
+              }));     
             },
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
